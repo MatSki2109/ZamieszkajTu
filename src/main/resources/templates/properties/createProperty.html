@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ZamieszkajTU</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<style>
+    body {
+        background: #717977;
+    }
+    h2 {
+        text-decoration: underline;
+        color: #0c0c0c;
+    }
+
+    div.col-md-8 {
+        background-color: #a5b44f;
+
+    }
+
+    label {
+        font-weight: bold;
+
+    }
+
+    a {
+        --bs-btn-padding-y: .25rem;
+        --bs-btn-padding-y: .25rem;
+        --bs-btn-padding-x: .5rem;
+        --bs-btn-font-size: .75rem;
+    }
+
+
+</style>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-teritary" style="background-color: #a5b44f;">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="zamieszkajtu">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <h2><span class="badge text-bg-dark">ZamieszkajTU    </span></h2>
+
+                </li>
+                <li class="nav-item">
+                    <img width="45" height="45"
+                         src="https://img.icons8.com/3d-fluency/48/order-delivered.png" alt="order-delivered"/>
+                </li>
+            </ul>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <li class="nav-item">
+                    <a class="btn btn-dark me-md-2" href="/properties">Zobacz wszystkie ogłoszenia</a>
+                </li><li class="nav-item">
+                <a class="btn btn-dark"  href="/">
+                    Powrót na stronę główną</a>
+            </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto rounded border p-4 m-4">
+                <h2 class="text-center mb-5">Edytuj Ogłoszenie Nieruchomości</h2>
+
+                <form method="post" enctype="multipart/form-data" th:object="${propertyDto}">
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Tytuł Ogłoszenia</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" th:field="${propertyDto.titleProperty}">
+                            <p th:if="${#fields.hasErrors('titleProperty')}" th:errorclass="text-danger"
+                               th:errors="${propertyDto.titleProperty}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Kategoria Nieruchomości</label>
+                        <div class="col-sm-8">
+                            <select class="form-select" th:field="${propertyDto.categoryProperty}">
+                                <option value="Mieszkanie">Mieszkanie</option>
+                                <option value="Dom">Dom</option>
+                                <option value="Działka">Działka</option>
+                                <option value="Lokal użytkowy">Lokal użytkowy</option>
+                            </select>
+                            <p th:if="${#fields.hasErrors('categoryProperty')}" th:errorclass="text-danger"
+                               th:errors="${propertyDto.categoryProperty}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Miasto nieruchomości</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" th:field="${propertyDto.city}">
+                            <p th:if="${#fields.hasErrors('city')}" th:errorclass="text-danger"
+                               th:errors="${propertyDto.city}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Adres nieruchomości</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" th:field="${propertyDto.address}">
+                            <p th:if="${#fields.hasErrors('address')}" th:errorclass="text-danger"
+                               th:errors="${propertyDto.address}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Cena</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="number" step="0.1" min="1"
+                                   th:field="${propertyDto.price}">
+                            <p th:if="${#fields.hasErrors('price')}" th:errorclass="text-danger"
+                               th:errors="${propertyDto.price}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Opis Nieruchomości</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" rows="7" th:field="${propertyDto.description}"></textarea>
+                            <p th:if="${#fields.hasErrors('description')}" th:errorclass="text-danger"
+                               th:errors="${propertyDto.description}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-4 col-form-label">Zdjęcie</label>
+                        <div class="col-sm-8">
+                            <input class="form-control" type="file" th:field="${propertyDto.imageFile}">
+                            <p th:if="${#fields.hasErrors('imageFile')}" th:errorclass="text-danger"
+                               th:errors="${propertyDto.imageFile}"></p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="offset-sm-4 col-sm-4 d-grid">
+                            <button type="submit" class="btn btn-success">Dodaj</button>
+                        </div>
+                        <div class="col-sm-4 d-grid">
+                            <a class="btn btn-outline-primary" href="/" role="button">Powrót</a>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
